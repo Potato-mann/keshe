@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface StudentDao extends JpaRepository<Student,Integer> {
 
-    public  List<Student> findAll();
+    List<Student> findAll();
+    List<Student> findById(int id);
+    Student save(Student student);
 }

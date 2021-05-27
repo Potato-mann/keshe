@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ContestDao extends Repository<Contest,Integer> {
     public List<Contest> findAll();
+    Contest findById(int id);
 }

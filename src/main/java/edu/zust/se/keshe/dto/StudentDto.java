@@ -1,29 +1,12 @@
-package edu.zust.se.keshe.entity;
+package edu.zust.se.keshe.dto;
 
-import com.sun.javafx.beans.IDProperty;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.annotation.Generated;
-import javax.persistence.*;
-
-@Entity
-public class Student {
-    @Id
-    @GeneratedValue
+public class StudentDto {
     private int id;
-    @Column
-    private String password;
-    @Column
     private String true_name;
-    @Column
     private String gender;
-    @Column
     private String department;
-    @Column
     private String major;
-    @Column
     private String clazz;
-    @Column
     private String phone;
 
     public int getId() {
@@ -34,20 +17,12 @@ public class Student {
         this.id = id;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getTrueName() {
         return true_name;
     }
 
-    public void setTrueName(String trueName) {
-        this.true_name = trueName;
+    public void setTrueName(String true_name) {
+        this.true_name = true_name;
     }
 
     public String getGender() {
@@ -92,10 +67,9 @@ public class Student {
 
     @Override
     public String toString() {
-        return "student{" +
+        return "StudentDto{" +
                 "id=" + id +
-                ", password='" + password + '\'' +
-                ", trueName='" + true_name + '\'' +
+                ", true_name='" + true_name + '\'' +
                 ", gender='" + gender + '\'' +
                 ", department='" + department + '\'' +
                 ", major='" + major + '\'' +
@@ -103,5 +77,4 @@ public class Student {
                 ", phone='" + phone + '\'' +
                 '}';
     }
-    
 }

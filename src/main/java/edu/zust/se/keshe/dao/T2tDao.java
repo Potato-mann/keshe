@@ -6,5 +6,6 @@ import org.springframework.data.repository.Repository;
 import java.util.List;
 
 public interface T2tDao extends Repository<T2t,Integer> {
-    public List<T2t> findAll();
+    List<T2t> findAll();
+    T2t findByTid(int tid);
 }
