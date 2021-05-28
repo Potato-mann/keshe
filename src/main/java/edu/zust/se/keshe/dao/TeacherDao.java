@@ -6,5 +6,6 @@ import org.springframework.data.repository.Repository;
 import java.util.List;
 
 public interface TeacherDao extends Repository<Teacher,Integer> {
-    public List<Teacher> findAll();
+    List<Teacher> findAll();
+    Teacher findById(int teacher_id);
 }

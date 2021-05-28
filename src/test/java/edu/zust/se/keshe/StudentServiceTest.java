@@ -1,14 +1,19 @@
 package edu.zust.se.keshe;
 
+import edu.zust.se.keshe.dto.Award;
 import edu.zust.se.keshe.dto.StudentDto;
 import edu.zust.se.keshe.dto.TeamDto;
 import edu.zust.se.keshe.service.StudentService;
 import edu.zust.se.keshe.service.impl.StudentServiceImpl;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.SQLOutput;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
 public class StudentServiceTest {
@@ -32,5 +37,17 @@ public class StudentServiceTest {
     public void testShowMyTeamInContest(){
         TeamDto teamDto=studentService.showMyTeamInContest(1180199152,1001);
         System.out.println(teamDto);
+    }
+    @Test
+    public void showMyAllAwards(){
+        List<Award> awardList=studentService.showMyAward(1180199152);
+        System.out.println(awardList);
+    }
+    @Test
+    public void testDate(){
+        Date now =new Date();
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        String date =dateFormat.format(now);
+        System.out.println(date);
     }
 }

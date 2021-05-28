@@ -8,6 +8,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,5 +30,24 @@ public class ContestServiceImpl implements ContestService {
         ContestDto contestDto=new ContestDto();
         BeanUtils.copyProperties(contest,contestDto);
         return contestDto;
+    }
+    public String showContestStatus(int cid){
+        Contest contest=contestDao.findById(cid);
+        Date date=new Date();
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        String now=simpleDateFormat.format(date);
+        System.out.println(now);
+        System.out.println(contest);
+        System.out.println(contest.getContest_start_time().toString().compareTo(now));
+        if(contest.getRegister_start_time().toString().compareTo(now)>0){
+            return "报名还未开始";
+        }else if(contest.getRegister_end_time().toString().compareTo(now)<0&&contest.getContest_start_time().toString().compareTo(now)>0){
+            return "报名时间已经结束";
+        }else if(contest.getContest_end_time().toString().compareTo(now)>=0&&contest.getContest_start_time().toString().compareTo(now)<=0){
+            return "比赛进行中";
+        }else if(contest.getContest_end_time().toString().compareTo(now)<0){
+            return "比赛已结束";
+        }
+        return "报名中";
     }
 }

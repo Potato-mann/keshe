@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ContestService {
     List<ContestDto> showAllContest();
+    String showContestStatus(int cid);
 }

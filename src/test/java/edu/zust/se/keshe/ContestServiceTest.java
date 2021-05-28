@@ -19,4 +19,8 @@ public class ContestServiceTest {
         List<ContestDto> contestDtoList=contestService.showAllContest();
         System.out.println(contestDtoList);
     }
+    @Test
+    public void testShowContestStatus(){
+        System.out.println(contestService.showContestStatus(1001));
+    }
 }
