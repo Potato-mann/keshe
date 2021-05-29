@@ -6,7 +6,7 @@ import java.sql.Date;
 @Entity
 public class Contest {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
     @Column
     private String name;

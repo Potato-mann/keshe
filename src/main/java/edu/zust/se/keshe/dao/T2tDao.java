@@ -8,4 +8,5 @@ import java.util.List;
 public interface T2tDao extends Repository<T2t,Integer> {
     List<T2t> findAll();
     T2t findByTid(int tid);
+    T2t save(T2t t2t);
 }

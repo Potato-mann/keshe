@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface StudentService {
     StudentDto login(int id , String password);
-    Boolean isInContest(int sid,int cid);
+    int isInContest(int sid,int cid);
     TeamDto showMyTeamInContest(int sid,int cid);
     List<Award> showMyAward(int sid);
+    Award showMyAwardInContest(int sid,int cid);
+    String signUp(int sid,int cid,List<Integer> students,int teacher_id,String teamName,String description);
 }

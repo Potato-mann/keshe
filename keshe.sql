@@ -11,7 +11,7 @@
  Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 23/05/2021 19:31:48
+ Date: 29/05/2021 14:54:17
 */
 
 SET NAMES utf8mb4;
@@ -49,7 +49,21 @@ CREATE TABLE `contest`  (
 -- ----------------------------
 -- Records of contest
 -- ----------------------------
-INSERT INTO `contest` VALUES (1001, 'lanqiao', 'zy', 10, '2021-05-01', '2021-05-03', '2021-05-25', '2021-05-26', 'zytxdy');
+INSERT INTO `contest` VALUES (1001, 'lanqiao', 'zy', 10, '2021-05-23', '2021-05-24', '2021-05-25', '2021-05-26', 'zytxdy');
+INSERT INTO `contest` VALUES (1002, '浙江省摸鱼大赛', 'yjf', 3, '2021-05-25', '2021-06-20', '2021-08-01', '2021-09-01', 'moyu');
+
+-- ----------------------------
+-- Table structure for hibernate_sequence
+-- ----------------------------
+DROP TABLE IF EXISTS `hibernate_sequence`;
+CREATE TABLE `hibernate_sequence`  (
+  `next_val` bigint(20) NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of hibernate_sequence
+-- ----------------------------
+INSERT INTO `hibernate_sequence` VALUES (21);
 
 -- ----------------------------
 -- Table structure for s2t
@@ -58,7 +72,7 @@ DROP TABLE IF EXISTS `s2t`;
 CREATE TABLE `s2t`  (
   `id` int(11) NOT NULL,
   `tid` int(11) NOT NULL,
-  `check` int(255) NOT NULL,
+  `scheck` int(255) NOT NULL,
   `sid` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
@@ -66,6 +80,8 @@ CREATE TABLE `s2t`  (
 -- ----------------------------
 -- Records of s2t
 -- ----------------------------
+INSERT INTO `s2t` VALUES (18, 17, 1, 1180199152);
+INSERT INTO `s2t` VALUES (19, 17, 0, 1);
 INSERT INTO `s2t` VALUES (1001, 1001, 1, 1180199152);
 
 -- ----------------------------
@@ -87,6 +103,7 @@ CREATE TABLE `student`  (
 -- ----------------------------
 -- Records of student
 -- ----------------------------
+INSERT INTO `student` VALUES (1, '123456', '王狗蛋', '男', '信息学院', '软件工程', '183', '120');
 INSERT INTO `student` VALUES (1180199152, '123456', 'yjf', '男', '信息学院', '软件工程', '183', '110');
 
 -- ----------------------------
@@ -103,6 +120,7 @@ CREATE TABLE `t2t`  (
 -- ----------------------------
 -- Records of t2t
 -- ----------------------------
+INSERT INTO `t2t` VALUES (20, 17, 1001);
 INSERT INTO `t2t` VALUES (1001, 1001, 1001);
 
 -- ----------------------------
@@ -144,6 +162,7 @@ CREATE TABLE `team`  (
 -- ----------------------------
 -- Records of team
 -- ----------------------------
-INSERT INTO `team` VALUES (1001, 'yjf说的都队', 3, 'yjftxdy', 1001, 1, 0, '暂未公布成绩');
+INSERT INTO `team` VALUES (17, 'yyyyjjjjfff', 2, 'yyyjjjfff', 1002, 1, 0, '暂未公布成绩');
+INSERT INTO `team` VALUES (1001, 'yjf说的都队', 1, 'yjftxdy', 1001, 1, 1, '暂未公布成绩');
 
 SET FOREIGN_KEY_CHECKS = 1;

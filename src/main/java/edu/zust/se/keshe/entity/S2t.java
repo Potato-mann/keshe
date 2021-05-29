@@ -5,14 +5,14 @@ import javax.persistence.*;
 @Entity
 public class S2t {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
     @Column
     private int tid;
     @Column
     private int sid;
     @Column
-    private  int check;
+    private  int scheck;
 
     public int getId() {
         return id;
@@ -38,12 +38,12 @@ public class S2t {
         this.sid = sid;
     }
 
-    public int getCheck() {
-        return check;
+    public int getScheck() {
+        return scheck;
     }
 
-    public void setCheck(int check) {
-        this.check = check;
+    public void setScheck(int check) {
+        this.scheck = check;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class S2t {
                 "id=" + id +
                 ", tid=" + tid +
                 ", sid=" + sid +
-                ", check=" + check +
+                ", check=" + scheck +
                 '}';
     }
 }

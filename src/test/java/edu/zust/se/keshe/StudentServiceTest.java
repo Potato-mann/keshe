@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 @SpringBootTest
@@ -49,5 +50,16 @@ public class StudentServiceTest {
         SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
         String date =dateFormat.format(now);
         System.out.println(date);
+    }
+    @Test
+    public void testShowMyAwardInContest(){
+        Award award=studentService.showMyAwardInContest(1180199152,1001);
+        System.out.println(award);
+    }
+    @Test
+    public void testSignUp(){
+        List<Integer> students=new LinkedList<>();
+        students.add(1);
+        System.out.println(studentService.signUp(1180199152, 1002, students, 1001, "yyyyjjjjfff", "yyyjjjfff"));
     }
 }

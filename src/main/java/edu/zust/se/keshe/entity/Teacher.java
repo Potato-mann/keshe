@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Entity
 public class Teacher {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
     @Column
     private String password;

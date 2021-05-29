@@ -8,6 +8,6 @@ import java.util.List;
 public interface StudentDao extends JpaRepository<Student,Integer> {
 
     List<Student> findAll();
-    List<Student> findById(int id);
+    Student findById(int id);
     Student save(Student student);
 }

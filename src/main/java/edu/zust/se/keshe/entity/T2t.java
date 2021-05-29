@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class T2t {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
     @Column
     private int tid;

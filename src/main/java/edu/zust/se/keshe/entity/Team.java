@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Team {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
     @Column
     private String name;
@@ -21,7 +21,7 @@ public class Team {
     private int t_check;
     @Column
     private String score;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
