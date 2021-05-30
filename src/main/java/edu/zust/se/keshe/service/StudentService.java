@@ -13,4 +13,8 @@ public interface StudentService {
     List<Award> showMyAward(int sid);
     Award showMyAwardInContest(int sid,int cid);
     String signUp(int sid,int cid,List<Integer> students,int teacher_id,String teamName,String description);
+    List<TeamDto> myApply(int sid);
+    String accept(int sid,int tid);
+    String refuse(int sid,int tid);
+    String signOut(int sid,int tid);
 }

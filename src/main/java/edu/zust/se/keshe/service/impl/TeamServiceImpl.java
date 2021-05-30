@@ -23,6 +23,8 @@ public class TeamServiceImpl implements TeamService {
     @Autowired
     S2tDao s2tDao;
     @Autowired
+    StudentDao studentDao;
+    @Autowired
     TeamDao teamDao;
     @Autowired
     ContestDao contestDao;
@@ -53,5 +55,33 @@ public class TeamServiceImpl implements TeamService {
         ContestDto contestDto=new ContestDto();
         BeanUtils.copyProperties(contest,contestDto);
         return contestDto;
+    }
+    public String showTeamStatus(int tid){
+        Team team=teamDao.findById(tid);
+        if(team.getS_check()==-1){
+            return "有同学拒绝参加该队伍";
+        }else if(team.getT_check()==-1){
+            return "老师拒绝了队伍的指导申请";
+        }else if(team.getS_check()!=team.getTeam_number()){
+            return "还有同学未确认参加该队伍";
+        }else if(team.getT_check()==0){
+            return "指导老师正在对你的队伍进行审核";
+        }else{
+            return "报名成功";
+        }
+    }
+    StudentDto e2d(Student student){
+        StudentDto studentDto=new StudentDto();
+        BeanUtils.copyProperties(student,studentDto);
+        return studentDto;
+    }
+    public List<StudentDto> showStudentInTeam(int tid){
+        List<StudentDto> studentDtos=new LinkedList<>();
+        List<S2t> s2ts= s2tDao.findByTid(tid);
+        for(S2t s2t:s2ts){
+            Student student=studentDao.findById(s2t.getSid());
+            studentDtos.add(e2d(student));
+        }
+        return studentDtos;
     }
 }

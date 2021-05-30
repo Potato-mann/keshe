@@ -19,4 +19,8 @@ public class TeamServiceTest {
             System.out.println(teamDto);
         }
     }
+    @Test
+    public void testShowStudentInTeam(){
+        System.out.println(teamService.showStudentInTeam(17));
+    }
 }

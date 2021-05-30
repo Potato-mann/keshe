@@ -50,18 +50,21 @@ public class StudentServiceImpl implements StudentService {
     public int isInContest(int sid,int cid){//0表示未报名，1表示报名失败，2表示报名进行中，3表示报名成功
         List<Team> teams=teamDao.findByCid(cid);
         for(Team team:teams){
-            S2t s2t=s2tDao.findByTid(team.getId());
-            if(s2t.getSid()==sid){
-                if(team.getS_check()==-1||team.getT_check()==-1){
-                    return 1;
-                }else{
-                    if(team.getS_check()==team.getTeam_number()&&team.getT_check()==1){
-                        return 3;
+            List<S2t> s2t=s2tDao.findByTid(team.getId());
+            for(S2t s2t1:s2t){
+                if(s2t1.getSid()==sid){
+                    if(team.getS_check()==-1||team.getT_check()==-1){
+                        return 1;
                     }else{
-                        return 2;
+                        if(team.getS_check()==team.getTeam_number()&&team.getT_check()==1){
+                            return 3;
+                        }else{
+                            return 2;
+                        }
                     }
                 }
             }
+
         }
         return 0;
     }
@@ -148,6 +151,10 @@ public class StudentServiceImpl implements StudentService {
         if(isInContest.size()!=0){
             return isInContest.toString()+"已经报名了该比赛";
         }
+        Team team11=teamDao.findByCidAndName(cid,teamName);
+        if (team11!=null){
+            return "名字已经被人抢走了，换个名字吧";
+        }
         //创建team
         Team team =new Team();
         team.setName(teamName);
@@ -178,5 +185,36 @@ public class StudentServiceImpl implements StudentService {
         t2t.setTid(tid);
         t2tDao.save(t2t);
         return "报名成功";
+    }
+    public List<TeamDto> myApply(int sid){
+        List<S2t> s2ts=s2tDao.findBySidAndScheck(sid,0);
+        List<TeamDto> teamDtos=new LinkedList<>();
+        for(S2t s2t:s2ts){
+            Team team=teamDao.findById(s2t.getTid());
+            teamDtos.add(e2d(team));
+        }
+        return teamDtos;
+    }
+    public String accept(int sid,int tid){
+        Team team=teamDao.findById(tid);
+        team.setS_check(team.getS_check()+1);
+        S2t s2t=s2tDao.findBySidAndTid(sid,tid);
+        s2t.setScheck(1);
+        teamDao.save(team);
+        s2tDao.save(s2t);
+        return "组队申请已经确认";
+    }
+    public String refuse(int sid,int tid){
+        Team team=teamDao.findById(tid);
+        team.setS_check(-1);
+        S2t s2t=s2tDao.findBySidAndTid(sid,tid);
+        s2t.setScheck(-1);
+        teamDao.save(team);
+        s2tDao.save(s2t);
+        return "组队申请已经拒绝";
+    }
+    public String signOut(int sid,int tid){
+        Team team=teamDao.findById(tid);
+        return "退出成功"
     }
 }

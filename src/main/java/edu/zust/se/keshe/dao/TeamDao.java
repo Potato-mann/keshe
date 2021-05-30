@@ -10,4 +10,5 @@ public interface TeamDao extends Repository<Team,Integer> {
     Team findById(int id);
     List<Team> findByCid(int cid);
     Team save(Team team);
+    Team findByCidAndName(int cid,String name);
 }
