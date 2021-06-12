@@ -17,4 +17,5 @@ public interface StudentService {
     String accept(int sid,int tid);
     String refuse(int sid,int tid);
     String signOut(int sid,int tid);
+    StudentDto showStudentInfo(int sid);
 }

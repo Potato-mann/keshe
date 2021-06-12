@@ -23,4 +23,9 @@ public class TeamServiceTest {
     public void testShowStudentInTeam(){
         System.out.println(teamService.showStudentInTeam(17));
     }
+    @Test
+    public void testShowThisTeam(){
+        System.out.println(teamService.showThisTeam(17));
+
+    }
 }

@@ -215,6 +215,11 @@ public class StudentServiceImpl implements StudentService {
     }
     public String signOut(int sid,int tid){
         Team team=teamDao.findById(tid);
-        return "退出成功"
+        return "退出成功";
+    }
+    public StudentDto showStudentInfo(int sid){
+        Student student=studentDao.findById(sid);
+        StudentDto studentDto=e2d(student);
+        return studentDto;
     }
 }

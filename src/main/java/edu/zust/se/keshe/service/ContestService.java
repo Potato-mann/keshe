@@ -8,4 +8,5 @@ import java.util.List;
 public interface ContestService {
     List<ContestDto> showAllContest();
     String showContestStatus(int cid);
+    List<ContestDto> showMyContest(int sid);
 }

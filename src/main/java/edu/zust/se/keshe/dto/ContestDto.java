@@ -12,6 +12,15 @@ public class ContestDto {
     private Date contest_start_time;
     private Date contest_end_time;
     private String description;
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public int getId() {
         return id;
@@ -97,6 +106,7 @@ public class ContestDto {
                 ", contest_start_time=" + contest_start_time +
                 ", contest_end_time=" + contest_end_time +
                 ", description='" + description + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

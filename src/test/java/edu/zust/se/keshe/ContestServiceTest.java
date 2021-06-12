@@ -23,4 +23,8 @@ public class ContestServiceTest {
     public void testShowContestStatus(){
         System.out.println(contestService.showContestStatus(1002));
     }
+    @Test
+    public void testShowMyContest(){
+        System.out.println(contestService.showMyContest(1));
+    }
 }

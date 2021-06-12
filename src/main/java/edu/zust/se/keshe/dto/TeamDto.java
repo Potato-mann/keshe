@@ -9,6 +9,7 @@ public class TeamDto {
     private int s_check;
     private int t_check;
     private String score;
+    private String status;
 
     public int getId() {
         return id;
@@ -74,17 +75,26 @@ public class TeamDto {
         this.score = score;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "TeamDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", team_number='" + team_number + '\'' +
+                ", team_number=" + team_number +
                 ", description='" + description + '\'' +
                 ", contest=" + contest +
                 ", s_check=" + s_check +
                 ", t_check=" + t_check +
                 ", score='" + score + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

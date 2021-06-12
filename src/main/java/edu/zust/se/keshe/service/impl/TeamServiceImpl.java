@@ -1,16 +1,10 @@
 package edu.zust.se.keshe.service.impl;
 
-import edu.zust.se.keshe.dao.ContestDao;
-import edu.zust.se.keshe.dao.S2tDao;
-import edu.zust.se.keshe.dao.StudentDao;
-import edu.zust.se.keshe.dao.TeamDao;
+import edu.zust.se.keshe.dao.*;
 import edu.zust.se.keshe.dto.ContestDto;
 import edu.zust.se.keshe.dto.StudentDto;
 import edu.zust.se.keshe.dto.TeamDto;
-import edu.zust.se.keshe.entity.Contest;
-import edu.zust.se.keshe.entity.S2t;
-import edu.zust.se.keshe.entity.Student;
-import edu.zust.se.keshe.entity.Team;
+import edu.zust.se.keshe.entity.*;
 import edu.zust.se.keshe.service.TeamService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +22,10 @@ public class TeamServiceImpl implements TeamService {
     TeamDao teamDao;
     @Autowired
     ContestDao contestDao;
+    @Autowired
+    T2tDao t2tDao;
+    @Autowired
+    TeacherDao teacherDao;
     public List<TeamDto> showMyTeam(int id){
         List<S2t> s2ts=s2tDao.findBySid(id);
         System.out.println(id);
@@ -41,6 +39,7 @@ public class TeamServiceImpl implements TeamService {
                 System.out.println(team);
                 TeamDto teamDto=e2d(team);
                 teamDto.setContest(e2d(contestDao.findById(team.getCid())));
+                teamDto.setStatus(showTeamStatus(teamDto.getId()));
                 teams.add(teamDto);
             }
             return teams;
@@ -83,5 +82,19 @@ public class TeamServiceImpl implements TeamService {
             studentDtos.add(e2d(student));
         }
         return studentDtos;
+    }
+
+    @Override
+    public Teacher showTeacherInTeam(int tid) {
+        T2t t2t=t2tDao.findByTid(tid);
+        Teacher teacher=teacherDao.findById(t2t.getTeacher_id());
+        return teacher;
+    }
+    public TeamDto showThisTeam(int tid){
+        Team team=teamDao.findById(tid);
+        TeamDto teamDto=e2d(team);
+        teamDto.setContest(e2d(contestDao.findById(team.getCid())));
+        teamDto.setStatus(showTeamStatus(teamDto.getId()));
+        return teamDto;
     }
 }
