@@ -43,45 +43,30 @@
     <div class="layui-body">
         <table>
             <tr>
-                <td>队伍id</td>
-                <td th:text="${session.teamMassage.getTeamDto().getId()}"></td>
-            </tr>
-            <tr>
+                <td>比赛名称</td>
                 <td>队伍名称</td>
-                <td th:text="${session.teamMassage.getTeamDto().getName()}"></td>
             </tr>
-            <tr>
-                <td>队伍人数</td>
-                <td th:text="${session.teamMassage.getTeamDto().getTeam_number()}"></td>
-            </tr>
-            <tr>
-                <td>参加比赛</td>
-                <td th:text="${session.teamMassage.getTeamDto().getContest().getName()}"></td>
-            </tr>
-            <tr>
-                <td>队伍简介</td>
-                <td th:text="${session.teamMassage.getTeamDto().getDescription()}"></td>
-            </tr>
-            <tr>
-                <td>指导老师</td>
-                <td th:text="${session.teamMassage.getTeacher().getTrue_name()}"></td>
+            <tr th:each="a:${session.myApply}">
+                <td th:text="${a.getContest().getName()}"></td>
+                <td th:text="${a.getName()}"></td>
                 <td>
-                    <form action="/showTeacher" method="post">
-                        <input type="hidden" name="tid" id="tid" th:value="${session.teamMassage.getTeamDto().getId()}">
-                        <input type="submit" value="查看老师信息">
+                    <form action="/showTeam" method="post">
+                        <input type="hidden" name="tid" th:value="${a.getId()}">
+                        <input type="submit" value="查看队伍信息">
                     </form>
                 </td>
-            </tr>
-            <tr th:each="s:${session.teamMassage.getStudentDtoList()}">
-                <td>队伍成员</td>
-                <td th:text="${s.getTrueName()}"></td>
                 <td>
-                    <form action="/showStudent" method="post">
-                        <input type="hidden" name="sid" id="sid" th:value="${s.getId()}">
-                        <input type="submit" value="查看学生信息">
+                    <form action="/accept" method="post">
+                        <input type="hidden" name="tid" th:value="${a.getId()}">
+                        <input type="submit" value="接受">
                     </form>
                 </td>
-
+                <td>
+                    <form action="/refuse" method="post">
+                        <input type="hidden" name="tid" th:value="${a.getId()}">
+                        <input type="submit" value="拒绝">
+                    </form>
+                </td>
             </tr>
         </table>
     </div>

@@ -54,19 +54,64 @@
                 <td>比赛状态</td>
                 <td>比赛介绍</td>
             </tr>
-            <tr th:each="v:${session.myContests}">
-                <td th:text="${v.getId()}"></td>
-                <td th:text="${v.getName()}"></td>
-                <td th:text="${v.getSponsor()}"></td>
-                <td th:text="${v.getNumber_limit()}"></td>
-                <td th:text="${v.getRegister_start_time()}"></td>
-                <td th:text="${v.getRegister_end_time()}"></td>
-                <td th:text="${v.getContest_start_time()}"></td>
-                <td th:text="${v.getContest_end_time()}"></td>
-                <td th:text="${v.getStatus()}"></td>
-                <td th:text="${v.getDescription()}"></td>
+            <tr>
+                <td th:text="${session.applyContest.getId()}"></td>
+                <td th:text="${session.applyContest.getName()}"></td>
+                <td th:text="${session.applyContest.getSponsor()}"></td>
+                <td th:text="${session.applyContest.getNumber_limit()}"></td>
+                <td th:text="${session.applyContest.getRegister_start_time()}"></td>
+                <td th:text="${session.applyContest.getRegister_end_time()}"></td>
+                <td th:text="${session.applyContest.getContest_start_time()}"></td>
+                <td th:text="${session.applyContest.getContest_end_time()}"></td>
+                <td th:text="${session.applyContest.getStatus()}"></td>
+                <td th:text="${session.applyContest.getDescription()}"></td>
             </tr>
         </table>
+        <form action="/signUp" method="post">
+            <table>
+                <tr>
+                    队伍名称:<input type="text" name="teamName" id="teamName">
+                </tr>
+                <tr>
+                    队伍简介:<input type="text" name="description" id="description">
+                </tr>
+                <tr th:if="${session.applyContest.getNumber_limit() gt 1}">
+                    队员1:<input type="text" name="students[0]" id="students[0]">
+                </tr>
+                <tr th:if="${session.applyContest.getNumber_limit() gt 2}">
+                    队员2:<input type="text" name="students[1]" id="students[1]">
+                </tr>
+                <tr th:if="${session.applyContest.getNumber_limit() gt 3}">
+                    队员3:<input type="text" name="students[2]" id="students[2]">
+                </tr>
+                <tr th:if="${session.applyContest.getNumber_limit() gt 4}">
+                    队员4:<input type="text" name="students[3]" id="students[3]">
+                </tr>
+                <tr th:if="${session.applyContest.getNumber_limit() gt 5}">
+                    队员5:<input type="text" name="students[4]" id="students[4]">
+                </tr>
+                <tr th:if="${session.applyContest.getNumber_limit() gt 6}">
+                    队员6:<input type="text" name="students[5]" id="students[5]">
+                </tr>
+                <tr th:if="${session.applyContest.getNumber_limit() gt 7}">
+                    队员7:<input type="text" name="students[6]" id="students[6]">
+                </tr>
+                <tr th:if="${session.applyContest.getNumber_limit() gt 8}">
+                    队员8:<input type="text" name="students[7]" id="students[7]">
+                </tr>
+                <tr th:if="${session.applyContest.getNumber_limit() gt 9}">
+                    队员9:<input type="text" name="students[8]" id="students[8]">
+                </tr>
+                <tr th:if="${session.applyContest.getNumber_limit() gt 10}">
+                    队员10:<input type="text" name="students[9]" id="students[9]">
+                </tr>
+                <tr>
+                    指导老师:<input type="text" name="teacher_id" id="teacher_id">
+                </tr>
+                <input type="submit" value="报名">
+            </table>
+
+        </form>
     </div>
 
     <div class="layui-footer">

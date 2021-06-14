@@ -10,11 +10,14 @@ import edu.zust.se.keshe.service.ContestService;
 import edu.zust.se.keshe.service.StudentService;
 import edu.zust.se.keshe.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpSession;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -88,5 +91,88 @@ public class StudentController {
         StudentDto studentDto=studentService.showStudentInfo(sid);
         session.setAttribute("studentInfo",studentDto);
         return "showStudent";
+    }
+    @RequestMapping("/showTeacher")
+    public String showTeacher(int tid,HttpSession session,Model model){
+        Teacher teacher=teamService.showTeacherInTeam(tid);
+        session.setAttribute("teacher",teacher);
+        return "showTeacher";
+    }
+    @RequestMapping("/goToApply")
+    public String goToApply(int cid,HttpSession session,Model model){
+        ContestDto contest=contestService.findById(cid);
+        session.setAttribute("applyContest",contest);
+        String message=new String();
+        System.out.println(contest);
+        if(contest.getStatus().equals("报名中")){
+            StudentDto student=(StudentDto) session.getAttribute("student");
+            int flag=studentService.isInContest(student.getId(),contest.getId());
+
+            if (flag==1||flag==0){
+                return "apply";
+            }else {
+                if (flag==2) message="您的报名表正在审核中，请耐心等待";
+                else if(flag==3) message="你已经报名该比赛";
+            }
+        }else{
+            message= contest.getStatus();
+        }
+        session.setAttribute("applyMessage",message);
+        return "filedapply";
+    }
+    @RequestMapping("/signUp")
+
+    public String signUp(List<String> students, String teacher_id, String teamName, String description, HttpSession session, Model model){
+        List<Integer> student =new LinkedList<>();
+        String massage="";
+
+        if(teacher_id==null||teacher_id==""){
+            massage="未填写指导老师";
+            return "applyFailed";
+        }
+        if(teamName==null||teamName==""){
+            massage="请为队伍取一个好听的名字吧！";
+            return "applyFailed";
+        }
+        if(students!=null){
+            for(String s:students){
+                if(s!=null&&s!=""){
+                    student.add(Integer.parseInt(s));
+                }
+            }
+        }
+        StudentDto studentDto=(StudentDto)session.getAttribute("student");
+        ContestDto contestDto=(ContestDto)session.getAttribute("applyContest");
+        massage=studentService.signUp(studentDto.getId(),contestDto.getId(),student,Integer.parseInt(teacher_id),teamName,description);
+        if(massage=="报名成功"){
+            return "successApply";
+        }else {
+            session.setAttribute("failedApplyMassage",massage);
+            return "applyFailed";
+        }
+    }
+
+    @RequestMapping("/message")
+    public String message(HttpSession session, Model model){
+        StudentDto studentDto=(StudentDto)session.getAttribute("student");
+        List<TeamDto> myApply=studentService.myApply(studentDto.getId());
+        System.out.println("*************");
+        System.out.println(myApply);
+        session.setAttribute("myApply",myApply);
+        return "message";
+    }
+    @RequestMapping("/accept")
+    public String accept(int tid,HttpSession session,Model model){
+        StudentDto studentDto =(StudentDto)session.getAttribute("student");
+        String message=studentService.accept(studentDto.getId(),tid);
+        session.setAttribute("acceptMessage",message);
+        return "successAccept";
+    }
+    @RequestMapping("/refuse")
+    public String refuse(int tid,HttpSession session,Model model){
+        StudentDto studentDto=(StudentDto)session.getAttribute("student");
+        String message=studentService.refuse(studentDto.getId(),tid);
+        session.setAttribute("refuseMessage",message);
+        return "successRefuse";
     }
 }

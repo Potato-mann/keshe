@@ -76,4 +76,12 @@ public class ContestServiceImpl implements ContestService {
         System.out.println("*********************");
         return contestDtos;
     }
+
+    @Override
+    public ContestDto findById(int cid) {
+        Contest contest=contestDao.findById(cid);
+        ContestDto contestDto =e2d(contest);
+        contestDto.setStatus(showContestStatus(cid));
+        return contestDto;
+    }
 }

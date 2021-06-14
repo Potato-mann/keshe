@@ -9,4 +9,5 @@ public interface ContestService {
     List<ContestDto> showAllContest();
     String showContestStatus(int cid);
     List<ContestDto> showMyContest(int sid);
+    ContestDto findById(int cid);
 }

@@ -52,6 +52,7 @@
                 <td>比赛开始时间</td>
                 <td>比赛结束时间</td>
                 <td>比赛状态</td>
+                <td>比赛介绍</td>
             </tr>
             <tr th:each="v:${session.contests}">
                 <td th:text="${v.getId()}"></td>
@@ -63,6 +64,13 @@
                 <td th:text="${v.getContest_start_time()}"></td>
                 <td th:text="${v.getContest_end_time()}"></td>
                 <td th:text="${v.getStatus()}"></td>
+                <td th:text="${v.getDescription()}"></td>
+                <td>
+                    <form action="/goToApply" method="post">
+                        <input type="hidden" name="cid" id="cid" th:value="${v.getId()}">
+                        <input type="submit" value="报名">
+                    </form>
+                </td>
             </tr>
 
         </table>

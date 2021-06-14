@@ -2,6 +2,7 @@ package edu.zust.se.keshe.service.impl;
 
 import edu.zust.se.keshe.dao.*;
 import edu.zust.se.keshe.dto.Award;
+import edu.zust.se.keshe.dto.ContestDto;
 import edu.zust.se.keshe.dto.StudentDto;
 import edu.zust.se.keshe.dto.TeamDto;
 import edu.zust.se.keshe.entity.*;
@@ -126,21 +127,31 @@ public class StudentServiceImpl implements StudentService {
             }
         }
         Teacher teacher =teacherDao.findById(teacher_id);
+        System.out.println(teacher);
         if(teacher==null){
             return "查询不到该老师的身份信息";
         }
+        System.out.println("1111111111111111");
+        System.out.println(sid);
+        System.out.println(cid);
+        System.out.println(students);
+        System.out.println(teacher_id);
+        System.out.println(teamName);
+        System.out.println(description);
         List<Integer> nonExistent=new LinkedList<>();
         List<Integer> isInContest=new LinkedList<>();
-        for(int studentId: students){
-            Student student1=studentDao.findById(studentId);
-            if(student1==null){
-                nonExistent.add(studentId);
-            }else{
-                List<S2t> s2ts1=s2tDao.findBySid(studentId);
-                for(S2t s2t:s2ts1){
-                    Team team=teamDao.findById(s2t.getTid());
-                    if(team.getCid()==cid){
-                        isInContest.add(studentId);
+        if(students!=null){
+            for(int studentId: students){
+                Student student1=studentDao.findById(studentId);
+                if(student1==null){
+                    nonExistent.add(studentId);
+                }else{
+                    List<S2t> s2ts1=s2tDao.findBySid(studentId);
+                    for(S2t s2t:s2ts1){
+                        Team team=teamDao.findById(s2t.getTid());
+                        if(team.getCid()==cid){
+                            isInContest.add(studentId);
+                        }
                     }
                 }
             }
@@ -158,7 +169,12 @@ public class StudentServiceImpl implements StudentService {
         //创建team
         Team team =new Team();
         team.setName(teamName);
-        team.setTeam_number(students.size()+1);
+        if(students==null){
+            team.setTeam_number(1);
+        }else {
+            team.setTeam_number(students.size()+1);
+        }
+
         team.setDescription(description);
         team.setCid(cid);
         team.setS_check(1);
@@ -173,13 +189,16 @@ public class StudentServiceImpl implements StudentService {
         s2t.setSid(sid);
         System.out.println(s2t);
         s2tDao.save(s2t);
-        for(int studentId:students){
-            S2t s2t2 =new S2t();
-            s2t2.setTid(tid);
-            s2t2.setScheck(0);
-            s2t2.setSid(studentId);
-            s2tDao.save(s2t2);
+        if(students!=null){
+            for(int studentId:students){
+                S2t s2t2 =new S2t();
+                s2t2.setTid(tid);
+                s2t2.setScheck(0);
+                s2t2.setSid(studentId);
+                s2tDao.save(s2t2);
+            }
         }
+
         T2t t2t=new T2t();
         t2t.setTeacher_id(teacher_id);
         t2t.setTid(tid);
@@ -191,9 +210,16 @@ public class StudentServiceImpl implements StudentService {
         List<TeamDto> teamDtos=new LinkedList<>();
         for(S2t s2t:s2ts){
             Team team=teamDao.findById(s2t.getTid());
-            teamDtos.add(e2d(team));
+            TeamDto teamDto=e2d(team);
+            teamDto.setContest(e2d(contestDao.findById(team.getCid())));
+            teamDtos.add(teamDto);
         }
         return teamDtos;
+    }
+    ContestDto e2d(Contest contest){
+        ContestDto contestDto=new ContestDto();
+        BeanUtils.copyProperties(contest,contestDto);
+        return contestDto;
     }
     public String accept(int sid,int tid){
         Team team=teamDao.findById(tid);

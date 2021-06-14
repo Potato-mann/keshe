@@ -59,9 +59,8 @@ public class StudentServiceTest {
     @Test
     public void testSignUp(){
         List<Integer> students=new LinkedList<>();
-        students.add(3);
-        students.add(4);
-        System.out.println(studentService.signUp(2, 1002, students, 1001, "yyyjjjjfff", "yyyjjjfff"));
+        students.add(1180199152);
+        System.out.println(studentService.signUp(1, 1003, students, 1001, "yyff", "yyf"));
     }
     @Test
     public void testMyApply(){

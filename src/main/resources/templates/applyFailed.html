@@ -41,49 +41,7 @@
     </div>
 
     <div class="layui-body">
-        <table>
-            <tr>
-                <td>队伍id</td>
-                <td th:text="${session.teamMassage.getTeamDto().getId()}"></td>
-            </tr>
-            <tr>
-                <td>队伍名称</td>
-                <td th:text="${session.teamMassage.getTeamDto().getName()}"></td>
-            </tr>
-            <tr>
-                <td>队伍人数</td>
-                <td th:text="${session.teamMassage.getTeamDto().getTeam_number()}"></td>
-            </tr>
-            <tr>
-                <td>参加比赛</td>
-                <td th:text="${session.teamMassage.getTeamDto().getContest().getName()}"></td>
-            </tr>
-            <tr>
-                <td>队伍简介</td>
-                <td th:text="${session.teamMassage.getTeamDto().getDescription()}"></td>
-            </tr>
-            <tr>
-                <td>指导老师</td>
-                <td th:text="${session.teamMassage.getTeacher().getTrue_name()}"></td>
-                <td>
-                    <form action="/showTeacher" method="post">
-                        <input type="hidden" name="tid" id="tid" th:value="${session.teamMassage.getTeamDto().getId()}">
-                        <input type="submit" value="查看老师信息">
-                    </form>
-                </td>
-            </tr>
-            <tr th:each="s:${session.teamMassage.getStudentDtoList()}">
-                <td>队伍成员</td>
-                <td th:text="${s.getTrueName()}"></td>
-                <td>
-                    <form action="/showStudent" method="post">
-                        <input type="hidden" name="sid" id="sid" th:value="${s.getId()}">
-                        <input type="submit" value="查看学生信息">
-                    </form>
-                </td>
-
-            </tr>
-        </table>
+        <h1 th:text="${session.failedApplyMassage}"></h1>
     </div>
 
     <div class="layui-footer">
