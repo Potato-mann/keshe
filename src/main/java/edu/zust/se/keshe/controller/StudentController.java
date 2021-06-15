@@ -121,9 +121,25 @@ public class StudentController {
         return "filedapply";
     }
     @RequestMapping("/signUp")
-
-    public String signUp(List<String> students, String teacher_id, String teamName, String description, HttpSession session, Model model){
+    public String signUp(String student1,
+                         String student2,
+                         String student3,
+                         String student4,
+                         String student5,
+                         String student6,
+                         String student7,
+                         String student8,
+                         String student9,
+                         String student10,
+                         String teacher_id,
+                         String teamName,
+                         String description,
+                         HttpSession session,
+                         Model model){
         List<Integer> student =new LinkedList<>();
+        System.out.println(student1);
+        System.out.println(student2);
+        System.out.println(student3);
         String massage="";
 
         if(teacher_id==null||teacher_id==""){
@@ -134,13 +150,16 @@ public class StudentController {
             massage="请为队伍取一个好听的名字吧！";
             return "applyFailed";
         }
-        if(students!=null){
-            for(String s:students){
-                if(s!=null&&s!=""){
-                    student.add(Integer.parseInt(s));
-                }
-            }
-        }
+        if(student1!=null) student.add(Integer.parseInt(student1));
+        if(student2!=null) student.add(Integer.parseInt(student2));
+        if(student3!=null) student.add(Integer.parseInt(student3));
+        if(student4!=null) student.add(Integer.parseInt(student4));
+        if(student5!=null) student.add(Integer.parseInt(student5));
+        if(student6!=null) student.add(Integer.parseInt(student6));
+        if(student7!=null) student.add(Integer.parseInt(student7));
+        if(student8!=null) student.add(Integer.parseInt(student8));
+        if(student9!=null) student.add(Integer.parseInt(student9));
+        if(student10!=null) student.add(Integer.parseInt(student10));
         StudentDto studentDto=(StudentDto)session.getAttribute("student");
         ContestDto contestDto=(ContestDto)session.getAttribute("applyContest");
         massage=studentService.signUp(studentDto.getId(),contestDto.getId(),student,Integer.parseInt(teacher_id),teamName,description);
