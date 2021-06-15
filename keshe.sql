@@ -11,7 +11,7 @@
  Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 29/05/2021 14:54:17
+ Date: 15/06/2021 10:18:43
 */
 
 SET NAMES utf8mb4;
@@ -51,6 +51,9 @@ CREATE TABLE `contest`  (
 -- ----------------------------
 INSERT INTO `contest` VALUES (1001, 'lanqiao', 'zy', 10, '2021-05-23', '2021-05-24', '2021-05-25', '2021-05-26', 'zytxdy');
 INSERT INTO `contest` VALUES (1002, '浙江省摸鱼大赛', 'yjf', 3, '2021-05-25', '2021-06-20', '2021-08-01', '2021-09-01', 'moyu');
+INSERT INTO `contest` VALUES (1003, '浙江省老年人手速大赛', 'yjf', 2, '2021-05-25', '2021-06-25', '2021-08-01', '2021-09-01', 'iamfive');
+INSERT INTO `contest` VALUES (1004, '中国大学生程序设计竞赛', 'zy', 3, '2021-05-25', '2021-06-25', '2021-08-01', '2021-09-01', 'ccpc');
+INSERT INTO `contest` VALUES (1005, 'icpc上海站', 'zy', 3, '2021-05-25', '2021-06-25', '2021-09-01', '2021-10-01', 'icpc');
 
 -- ----------------------------
 -- Table structure for hibernate_sequence
@@ -63,7 +66,7 @@ CREATE TABLE `hibernate_sequence`  (
 -- ----------------------------
 -- Records of hibernate_sequence
 -- ----------------------------
-INSERT INTO `hibernate_sequence` VALUES (21);
+INSERT INTO `hibernate_sequence` VALUES (66);
 
 -- ----------------------------
 -- Table structure for s2t
@@ -81,7 +84,17 @@ CREATE TABLE `s2t`  (
 -- Records of s2t
 -- ----------------------------
 INSERT INTO `s2t` VALUES (18, 17, 1, 1180199152);
-INSERT INTO `s2t` VALUES (19, 17, 0, 1);
+INSERT INTO `s2t` VALUES (19, 17, 1, 1);
+INSERT INTO `s2t` VALUES (26, 25, 1, 2);
+INSERT INTO `s2t` VALUES (27, 25, 1, 3);
+INSERT INTO `s2t` VALUES (28, 25, -1, 4);
+INSERT INTO `s2t` VALUES (51, 50, 1, 1);
+INSERT INTO `s2t` VALUES (52, 50, 0, 1180199152);
+INSERT INTO `s2t` VALUES (55, 54, 1, 1);
+INSERT INTO `s2t` VALUES (56, 54, 0, 1180199152);
+INSERT INTO `s2t` VALUES (62, 61, 1, 1180199152);
+INSERT INTO `s2t` VALUES (63, 61, 1, 1);
+INSERT INTO `s2t` VALUES (64, 61, 0, 2);
 INSERT INTO `s2t` VALUES (1001, 1001, 1, 1180199152);
 
 -- ----------------------------
@@ -104,6 +117,9 @@ CREATE TABLE `student`  (
 -- Records of student
 -- ----------------------------
 INSERT INTO `student` VALUES (1, '123456', '王狗蛋', '男', '信息学院', '软件工程', '183', '120');
+INSERT INTO `student` VALUES (2, '123456', '张三', '男', '信息学院', '软件工程', '183', '130');
+INSERT INTO `student` VALUES (3, '123456', '李四', '男', '信息学院', '软件工程', '183', '140');
+INSERT INTO `student` VALUES (4, '123456', '王五', '男', '信息学院', '软件工程', '183', '150');
 INSERT INTO `student` VALUES (1180199152, '123456', 'yjf', '男', '信息学院', '软件工程', '183', '110');
 
 -- ----------------------------
@@ -121,6 +137,10 @@ CREATE TABLE `t2t`  (
 -- Records of t2t
 -- ----------------------------
 INSERT INTO `t2t` VALUES (20, 17, 1001);
+INSERT INTO `t2t` VALUES (29, 25, 1001);
+INSERT INTO `t2t` VALUES (53, 50, 1001);
+INSERT INTO `t2t` VALUES (57, 54, 1001);
+INSERT INTO `t2t` VALUES (65, 61, 1001);
 INSERT INTO `t2t` VALUES (1001, 1001, 1001);
 
 -- ----------------------------
@@ -162,7 +182,11 @@ CREATE TABLE `team`  (
 -- ----------------------------
 -- Records of team
 -- ----------------------------
-INSERT INTO `team` VALUES (17, 'yyyyjjjjfff', 2, 'yyyjjjfff', 1002, 1, 0, '暂未公布成绩');
+INSERT INTO `team` VALUES (17, 'yyyyjjjjfff', 2, 'yyyjjjfff', 1002, 2, 0, '暂未公布成绩');
+INSERT INTO `team` VALUES (25, 'yyyjjjjfff', 3, 'yyyjjjfff', 1002, -1, 0, '暂未公布成绩');
+INSERT INTO `team` VALUES (50, 'yyff', 2, 'yyf', 1004, 1, 0, '暂未公布成绩');
+INSERT INTO `team` VALUES (54, 'yyff', 2, 'yyf', 1003, 1, 0, '暂未公布成绩');
+INSERT INTO `team` VALUES (61, '我就是来摸鱼的', 3, '江南打铁王', 1005, 2, 0, '暂未公布成绩');
 INSERT INTO `team` VALUES (1001, 'yjf说的都队', 1, 'yjftxdy', 1001, 1, 1, '暂未公布成绩');
 
 SET FOREIGN_KEY_CHECKS = 1;
